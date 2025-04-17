@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ asset('icons/favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% endblock %}
+    <title>{% block title %}InFluxSion{% endblock %}</title>
+</head>
+<body class="bg-[#1D1D1D] text-white">
+{% if show_header is not defined or show_header %}
+    <header class="flex items-center z-10 justify-center sticky top-0 w-full h-24 mt-5 mb-5 px-4 ">
+        <img src="{{ asset('icons/logo.svg') }}" alt="InFluxSion" class="w-[100px] h-[100px] absolute left-4">
+        <div class="bg-white bg-opacity-[0.02] p-4 flex items-center space-x-12 rounded-full text-center mx-auto backdrop-blur-md">
+            <nav class="flex space-x-12">
+                <a href="{{ path('articles') }}" class="{{ app.request.pathinfo == path('articles') ? 'text-green-400' : 'text-[#C7C7C7]' }} hover:text-green-400">
+                    {{ ux_icon('majesticons:article-line', {width: '24px', height: '24px'}) }}
+                </a>
+                <a href="{{ path('sources') }}" class="{{ app.request.pathinfo == path('sources') ? 'text-green-400' : 'text-[#C7C7C7]' }} hover:text-green-400">
+                    {{ ux_icon('material-symbols:database', {width: '24px', height: '24px'}) }}
+                </a>
+            </nav>
+            <form method="POST" action="/logout" class="flex items-center">
+                <button type="submit" class="text-[#C7C7C7] hover:text-[#FF0000]">
+                    {{ ux_icon('prime:sign-out', {width: '24px', height: '24px'}) }}
+                </button>
+            </form>
+        </div>
+    </header>
+{% endif %}
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+</body>
+</html>
